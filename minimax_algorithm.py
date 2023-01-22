@@ -2,10 +2,6 @@ import board as board_module
 
 
 def list_all_available_coordinates(board):
-    '''
-    lists all available coordinates from the board
-    return list of tuples
-    '''
     list_available_coordinates = []
     for row_index, row in enumerate(board):
         for item_index, item in enumerate(row):
@@ -13,25 +9,22 @@ def list_all_available_coordinates(board):
                 list_available_coordinates.append((row_index, item_index))
     return list_available_coordinates
 
+
 def make_move(x_y_tuple, board, char):
     board[x_y_tuple[0]][x_y_tuple[1]] = char
 
+    
 def undo_move(x_y_tuple, board):
     board[x_y_tuple[0]][x_y_tuple[1]] = '.'
 
+    
 def is_board_full(board):
-  """
-  should return True if there are no more empty place on the board,
-  otherwise should return False
-  """
   for i in range(0, len(board)):
       for j in range(0, len(board[0])):
           if board[i][j] == '.': 
               return False
   return True
 
-def my_minimax():
-    pass
 
 def minimax(maximazing, board, char):
     if board_module.check_player(board, char) or is_board_full(board):
@@ -55,6 +48,7 @@ def minimax(maximazing, board, char):
     else:
         return min(scores)
 
+    
 def minimax2(is_maximizing, board, char):
     if board_module.check_player(board, char) or is_board_full(board) or board_module.check_player(board, 'O'):
         if board_module.get_winning_player(board) is None:
