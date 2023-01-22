@@ -3,7 +3,6 @@ from coordinates import get_human_coordinates, get_random_ai_coordinates, get_un
 from menu import get_menu_option, clear_screen
 
 
-
 HUMAN_VS_HUMAN = 1
 RANDOM_AI_VS_RANDOM_AI = 2
 HUMAN_VS_RANDOM_AI = 3
@@ -20,6 +19,7 @@ def choose_player_coordinates(board, current_player, game_mode):
     elif game_mode == 3 and current_player == 'X':
         return get_random_ai_coordinates(board, current_player)
 
+    
 def check_end(board):
     if check_player(board, 'O') or check_player(board, 'X') or is_board_full(board):
         clear_screen()
@@ -27,6 +27,7 @@ def check_end(board):
         display_board(board)
         return True
 
+    
 def main():
     game_mode = get_menu_option()
     board = get_empty_board()
