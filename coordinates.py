@@ -4,20 +4,14 @@ import random
 
 CORRECT_INPUT_OPTION = ['a1', 'a2', 'a3', 'b1', 'b2', 'b3', 'c1', 'c2', 'c3', 'quit']
 
+
 def check_available_coordinate(board, x_y_tuple):
-    '''
-    check if user can put his sign in specific coordinates
-    return True or False
-    '''
     if x_y_tuple in list_all_available_coordinates(board):
         return True
     return False
 
+
 def list_all_available_coordinates(board):
-    '''
-    lists all available coordinates from the board
-    return list of tuples
-    '''
     list_available_coordinates = []
     for row_index, row in enumerate(board):
         for item_index, item in enumerate(row):
@@ -25,56 +19,44 @@ def list_all_available_coordinates(board):
                 list_available_coordinates.append((row_index, item_index))
     return list_available_coordinates
 
+
 def get_input_from_human():
     return input('Please choose place on board. ')
-  
+
+
 def validate_user_input(user_input):
-    '''
-    return True or False
-    '''
     if user_input.lower() in CORRECT_INPUT_OPTION:
         return True
     else:
         return False
 
+    
 def quit_game():
-    '''
-    exit the program
-    '''
     exit()
 
+    
 def user_input_to_coordinates(user_input):
     user_input = user_input.lower()
     list_woords = ['a', 'b', 'c']
     list_rows = [0, 1, 2]
     user_row = None
-    # example user_input = 'C1'
 
     zip_object = zip(list_woords, list_rows)
     for item in zip_object:
         if item[0] == user_input[0]:
             user_row = item[1]
-    # return (2, 1)
     return (user_row, int(user_input[1])-1)
+
 
 def warning_message_outside_board():
     print('You choose wrong place on the board')
 
+    
 def warning_msg_already_taken():
     print('This position was already taken')
 
+    
 def get_human_coordinates(board, current_player):
-    """
-    Should return the read coordinates for the tic tac toe board from the terminal.
-    The coordinates should be in the format  letter, number where the letter is 
-    A, B or C and the number 1, 2 or 3.
-    If the user enters an invalid coordinate (like Z0 or 1A, A11, sadfdsaf) 
-    than a warning message should appear and the coordinates reading process repeated.
-    If the user enters a coordinate that is already taken on the board.
-    than a warning message should appear and the coordinates reading process repeated.
-    If the user enters the word "quit" in any format of capitalized letters the program
-    should stop.
-    """
     while True:
         human_input = get_input_from_human()
         if validate_user_input(human_input):
@@ -87,33 +69,13 @@ def get_human_coordinates(board, current_player):
         else:
             warning_message_outside_board()
 
+            
 def get_random_ai_coordinates(board, current_player):
-    """
-    Should return a tuple of 2 numbers. 
-    Each number should be between 0-2.
-    The chosen number should be only a free coordinate from the board.
-    If the board is full (all spots taken by either X or O) than "None"
-    should be returned.
-    """
     if board_module.is_board_full(board):
         return None 
     return random.choice(list_all_available_coordinates(board))
     
 
-def get_unbeatable_ai_coordinates(board, current_player):
-    """
-    Should return a tuple of 2 numbers. 
-    Each number should be between 0-2.
-    The chosen number should be only a free coordinate from the board.
-    The chosen coordinate should always stop the other player from winning or
-    maximize the current player's chances to win.
-    If the board is full (all spots taken by either X or O) than "None"
-    should be returned.
-    """
-    pass
-
-
-# run this file to test whether you have correctly implemented the functions
 if __name__ == "__main__":
   board_1 = [
     ["X", "X", "."],
